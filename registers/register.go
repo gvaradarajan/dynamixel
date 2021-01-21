@@ -62,6 +62,36 @@ const (
 	IGain               // XL-320
 	PGain               // XL-320
 	HardwareErrorStatus // XL-320
+
+	ModelInfo
+	DriveMode
+	OperatingMode
+	SecondaryID
+	ProtocolType
+	HomingOffset
+	MovingThreshold
+	MaxLimitVoltage
+	MinLimitVoltage
+	PWMLimit
+	VelocityLimit
+	MaxPositionLimit
+	MinPositionLimit
+	VIGain
+	VDGain
+	Feedforward2ndGain
+	Feedforward1stGain
+	BusWatchdog
+	GoalPWM
+	ProfileAcceleration
+	ProfileVelocity
+	RealtimeTick
+	MovingStatus
+	PresentPWM
+	PresentVelocity
+	VelocityTrajectory
+	PositionTrajectory
+
+
 	GoalVelocity
 	GoalTorque
 

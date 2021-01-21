@@ -3,7 +3,7 @@ package servo
 import (
 	"testing"
 
-	reg "github.com/adammck/dynamixel/registers"
+	reg "dynamixel/registers"
 	"github.com/stretchr/testify/assert"
 )
 

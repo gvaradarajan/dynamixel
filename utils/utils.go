@@ -15,6 +15,9 @@ func BytesToInt(b []byte) (int, error) {
 	case 2:
 		return int(b[0]) | int(b[1])<<8, nil
 
+	case 4:
+		return int(b[0]) | int(b[1])<<8 | int(b[2])<<16 | int(b[3])<<24, nil
+
 	default:
 		return 0, fmt.Errorf("invalid read length %d", len(b))
 
@@ -34,10 +37,10 @@ func IntToBool(v int) bool {
 	return (v != 0)
 }
 
-func Low(i int) byte {
-	return byte(i & 0xFF)
-}
-
-func High(i int) byte {
-	return Low(i >> 8)
+func GetByte(i int, bytepos uint) byte{
+	if bytepos > 0{
+		return GetByte(i >> 8, bytepos - 1)
+	}else{
+		return byte(i & 0xFF)
+	}
 }

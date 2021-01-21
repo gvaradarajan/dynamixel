@@ -3,9 +3,9 @@ package ax
 import (
 	"io"
 
-	"github.com/adammck/dynamixel/protocol/v1"
-	reg "github.com/adammck/dynamixel/registers"
-	"github.com/adammck/dynamixel/servo"
+	"dynamixel/protocol/v1"
+	reg "dynamixel/registers"
+	"dynamixel/servo"
 )
 
 // New returns a new AX-series servo with the given ID.

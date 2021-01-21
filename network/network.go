@@ -5,7 +5,7 @@ import (
 	"io"
 	"time"
 
-	"github.com/adammck/dynamixel/iface"
+	"dynamixel/iface"
 )
 
 const (

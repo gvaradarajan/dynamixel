@@ -1,8 +1,8 @@
 package servo
 
 import (
-	reg "github.com/adammck/dynamixel/registers"
-	"github.com/adammck/dynamixel/utils"
+	reg "dynamixel/registers"
+	"dynamixel/utils"
 )
 
 // These methods are getters for the various registers in the control table.

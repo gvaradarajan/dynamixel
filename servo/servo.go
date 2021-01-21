@@ -4,9 +4,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/adammck/dynamixel/iface"
-	reg "github.com/adammck/dynamixel/registers"
-	"github.com/adammck/dynamixel/utils"
+	"dynamixel/iface"
+	reg "dynamixel/registers"
+	"dynamixel/utils"
 )
 
 const (
@@ -89,7 +89,7 @@ func (s *Servo) SetReturnLevel(value int) error {
 	// return status level will depend upon the new level, rather than the
 	// current level. We don't want to update that until we're sure that the write
 	// was successful.
-	err := s.Protocol.WriteData(s.ID, int(reg.Address), []byte{utils.Low(value)}, (value == 2))
+	err := s.Protocol.WriteData(s.ID, int(reg.Address), []byte{utils.GetByte(value, 0)}, (value == 2))
 	if err != nil {
 		return err
 	}
@@ -154,7 +154,7 @@ func (s *Servo) getRegister(n reg.RegName) (int, error) {
 		return 0, fmt.Errorf("can't read unsupported register: %v", n)
 	}
 
-	if r.Length != 1 && r.Length != 2 {
+	if r.Length < 1 || r.Length > 4 {
 		return 0, fmt.Errorf("invalid register length: %d", r.Length)
 	}
 
@@ -201,13 +201,16 @@ func (s *Servo) setRegister(n reg.RegName, value int) error {
 
 	// Pass the appropriate number of params based on the register, not value.
 	// (We've already checked that the value is in range, above.)
+	// TODO: make this not be hardcoded length horribleness
 	var params []byte
 	switch r.Length {
 	case 1:
-		params = []byte{utils.Low(value)}
+		params = []byte{utils.GetByte(value, 0)}
 
 	case 2:
-		params = []byte{utils.Low(value), utils.High(value)}
+		params = []byte{utils.GetByte(value, 0), utils.GetByte(value, 1)}
+	case 4:
+		params = []byte{utils.GetByte(value, 0), utils.GetByte(value, 1), utils.GetByte(value, 2), utils.GetByte(value, 3)}
 
 	default:
 		return fmt.Errorf("invalid register length: %d", r.Length)

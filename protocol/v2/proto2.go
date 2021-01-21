@@ -6,7 +6,7 @@ import (
 	"io"
 	"time"
 
-	"github.com/adammck/dynamixel/network"
+	"dynamixel/network"
 )
 
 const (

@@ -4,9 +4,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/adammck/dynamixel)](https://goreportcard.com/report/github.com/adammck/dynamixel)
 [![GoDoc](https://godoc.org/github.com/adammck/dynamixel?status.svg)](https://godoc.org/github.com/adammck/dynamixel)
 
-This packages provides a Go interface to Dynamixel servos. It's tested against
-[AX-12] [ax] and [XL-320] [xl] servos (because I am a cheapskate), but should
-work with other models.
+This packages provides a Go interface to Dynamixel servos.
 
 
 ## Example
@@ -16,14 +14,39 @@ package main
 
 import (
   "log"
+  "fmt"
   "github.com/jacobsa/go-serial/serial"
-  "github.com/adammck/dynamixel/network"
-  "github.com/adammck/dynamixel/servo/ax"
+  "dynamixel/network"
+  "dynamixel/servo"
+  "dynamixel/servo/xl430"
 )
+
+func GoalAndTrack(s *servo.Servo, pos int) error{
+  curPos, err := s.PresentPosition()
+  if err != nil {
+    return err
+  }
+  if curPos == pos{
+    fmt.Println("Already at ", pos, " nothing to do")
+  }else{
+    err = s.SetGoalPosition(pos)
+    if err != nil {
+      return err
+    }
+    for(curPos != pos){
+      curPos, err = s.PresentPosition()
+      if err != nil {
+        return err
+      }
+      fmt.Println("Goal: ", pos, " currently at: ", curPos)
+    }
+  }
+  return nil
+}
 
 func main() {
   options := serial.OpenOptions{
-    PortName: "/dev/tty.usbserial-A9ITPZVR",
+    PortName: "/dev/ttyUSB1",
     BaudRate: 1000000,
     DataBits: 8,
     StopBits: 1,
@@ -37,7 +60,7 @@ func main() {
   }
 
   network := network.New(serial)
-  servo, err := ax.New(network, 1)
+  servo, err := xl430.New(network, 2)
   if err != nil {
     log.Fatalf("error initializing servo: %v\n", err)
   }
@@ -46,12 +69,29 @@ func main() {
   if err != nil {
     log.Fatalf("error pinging servo: %v\n", err)
   }
+  var ver int
+  ver, err = servo.ModelNumber()
+  if err != nil {
+    log.Fatalf("error getting model num: %v\n", err)
+  }
+  fmt.Println(ver)
 
-  err = servo.SetGoalPosition(512)
+  err = servo.SetTorqueEnable(true)
+  if err != nil {
+    log.Fatalf("error setting Torque on\n", err)
+  }
+  err = GoalAndTrack(servo, 950)
   if err != nil {
     log.Fatalf("error setting goal position: %v\n", err)
   }
+
+  err = GoalAndTrack(servo, 850)
+  if err != nil {
+    log.Fatalf("error setting goal position: %v\n", err)
+  }
+  err = servo.SetTorqueEnable(false)
 }
+
 ```
 
 More examples can be found in the [examples] [examples] directory of this repo.
@@ -59,7 +99,7 @@ More examples can be found in the [examples] [examples] directory of this repo.
 
 ## Documentation
 
-The docs can be found at [godoc.org] [docs], as usual.  
+The docs can be found at [godoc.org] [docs], as usual.
 The API is based on the Dynamixel [v1 protocol] [proto] docs.
 
 
@@ -70,7 +110,8 @@ The API is based on the Dynamixel [v1 protocol] [proto] docs.
 
 ## Author
 
-[Adam Mckaig] [adammck] made this just for you.  
+[Adam Mckaig] [adammck] made this just for you.
+[Peter LoVerso] [biotinker] updated it so that it works on things made this decade.
 
 
 
@@ -81,4 +122,3 @@ The API is based on the Dynamixel [v1 protocol] [proto] docs.
 [examples]: https://github.com/adammck/dynamixel/tree/master/examples
 [proto]:    http://support.robotis.com/en/product/dynamixel/ax_series/dxl_ax_actuator.htm#Control_Table
 [license]:  https://github.com/adammck/dynamixel/blob/master/LICENSE
-[adammck]:  http://github.com/adammck
