@@ -246,3 +246,11 @@ func (s *Servo) setRegister(n reg.RegName, value int) error {
 func (s *Servo) Ping() error {
 	return s.Protocol.Ping(s.ID)
 }
+
+// PrintRegisters prints out the contents of all registers
+func (s *Servo) PrintRegisters() {
+	for k, _ := range(s.registers){
+		v, _ := s.getRegister(k)
+		fmt.Println(k, ": ",v)
+	}
+}

@@ -91,6 +91,10 @@ const (
 	VelocityTrajectory
 	PositionTrajectory
 
+	CurrentLimit
+	GoalCurrent
+	PresentCurrent
+
 
 	GoalVelocity
 	GoalTorque

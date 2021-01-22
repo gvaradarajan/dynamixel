@@ -1,25 +1,16 @@
-package ax
+package s_model
 
 import (
-	"io"
-
-	"dynamixel/protocol/v1"
 	reg "dynamixel/registers"
-	"dynamixel/servo"
 )
 
-// New returns a new AX-series servo with the given ID.
+// New returns a new AX-series register
 // See: http://support.robotis.com/en/product/dynamixel/ax_series/dxl_ax_actuator.htm
-func New(network io.ReadWriter, ID int) (*servo.Servo, error) {
-	return servo.New(v1.New(network), Registers, ID), nil
-}
 
-var Registers reg.Map
-
-func init() {
+func init_ax() reg.Map {
 	x := 0
 
-	Registers = reg.Map{
+	Registers := reg.Map{
 
 		// EEPROM: Persisted
 		reg.ModelNumber:             {0x00, 2, reg.RO, x, x},
@@ -57,4 +48,5 @@ func init() {
 		reg.Lock:                  {0x2f, 1, reg.RW, 0, 1}, // bool
 		reg.Punch:                 {0x30, 2, reg.RW, 32, 1023},
 	}
+	return Registers
 }
