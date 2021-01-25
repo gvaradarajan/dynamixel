@@ -215,6 +215,12 @@ func (s *Servo) SetGoalPosition(pos int) error {
 func (s *Servo) SetGoalPWM(val int) error {
 	return s.setRegister(reg.GoalPWM, val)
 }
+func (s *Servo) SetProfileVelocity(val int) error {
+	return s.setRegister(reg.ProfileVelocity, val)
+}
+func (s *Servo) SetProfileAcceleration(val int) error {
+	return s.setRegister(reg.ProfileAcceleration, val)
+}
 
 // MovingSpeed returns the current moving speed. This is not the speed at which
 // the motor is moving, it's the speed at which the servo wants to move.
