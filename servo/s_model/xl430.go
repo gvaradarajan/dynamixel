@@ -10,7 +10,7 @@ func init_xl430() reg.Map{
 
 	Registers := reg.Map{
 		// Note that we use -1 for nonexistent default values
-		// Currently no servos have any defualts below 0
+		// Currently no servos have any defaults below 0
 		// EEPROM: Persisted
 		reg.ModelNumber:             {0x00, 2, reg.RO, x, x},
 		reg.ModelInfo:               {0x02, 4, reg.RO, x, x},
