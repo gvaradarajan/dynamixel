@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"time"
 	"dynamixel/servo"
-	"dynamixel/arm"
 )
 
 type Wx250s struct{
@@ -41,7 +40,7 @@ func New(servos []*servo.Servo) *Wx250s{
 func (a *Wx250s) Close(block bool) error{
 	err := a.Joints["Gripper"][0].SetGoalPWM(-350)
 	if block{
-		arm.WaitForMovement(a.Joints["Gripper"][0])
+		servo.WaitForMovementVar(a.Joints["Gripper"][0])
 	}
 	return err
 }
@@ -154,16 +153,52 @@ func (a *Wx250s) TorqueOff() error{
 // Set a joint to a position
 func (a *Wx250s) JointTo(joint string, pos int, block bool) error{
 	fmt.Println("setting ", joint, " to ", pos)
-	return arm.GoalAndTrack(pos, block, a.GetServos(joint)...)
+	return servo.GoalAndTrack(pos, block, a.GetServos(joint)...)
 }
 
 //Go back to the sleep position, ready to turn off torque
 func (a *Wx250s) SleepPosition() error{
-	a.JointTo("Waist", 2034, true)
-	a.JointTo("Shoulder", 840, true)
-	a.JointTo("Wrist_rot", 2038, true)
-	a.JointTo("Wrist", 2509, true)
-	a.JointTo("Forearm_rot", 2064, true)
-	a.JointTo("Elbow", 3090, true)
+	sleepWait := false
+	a.JointTo("Waist", 2048, sleepWait)
+	a.JointTo("Shoulder", 840, sleepWait)
+	a.JointTo("Wrist_rot", 2048, sleepWait)
+	a.JointTo("Wrist", 2509, sleepWait)
+	a.JointTo("Forearm_rot", 2048, sleepWait)
+	a.JointTo("Elbow", 3090, sleepWait)
+	a.WaitForMovement()
+	return nil
+}
+
+//Go to the home position
+func (a *Wx250s) HomePosition() error{
+	wait := false
+	a.JointTo("Waist", 2048, wait)
+	a.JointTo("Shoulder", 2048, wait)
+	a.JointTo("Wrist_rot", 2048, wait)
+	a.JointTo("Wrist", 2048, wait)
+	a.JointTo("Forearm_rot", 2048, wait)
+	a.JointTo("Elbow", 2048, wait)
+	a.WaitForMovement()
+	return nil
+}
+
+// WaitForMovement takes some servos, and will block until the servos are done moving
+func (a *Wx250s) WaitForMovement() error{
+	allAtPos := false
+
+	for !allAtPos{
+		time.Sleep(200 * time.Millisecond)
+		allAtPos = true
+		for _, s := range(a.GetAllServos()){
+			isMoving, err := s.Moving()
+			if err != nil {
+				return err
+			}
+			// TODO: Make this configurable
+			if isMoving != 0{
+				allAtPos = false
+			}
+		}
+	}
 	return nil
 }
