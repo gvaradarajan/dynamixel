@@ -1,8 +1,8 @@
 # Dynamixel
 
-[![Build Status](https://travis-ci.org/adammck/dynamixel.svg?branch=master)](https://travis-ci.org/adammck/dynamixel)
-[![Go Report Card](https://goreportcard.com/badge/github.com/adammck/dynamixel)](https://goreportcard.com/report/github.com/adammck/dynamixel)
-[![GoDoc](https://godoc.org/github.com/adammck/dynamixel?status.svg)](https://godoc.org/github.com/adammck/dynamixel)
+[![Build Status](https://travis-ci.org/echolabsinc/dynamixel.svg?branch=master)](https://travis-ci.org/echolabsinc/dynamixel)
+[![Go Report Card](https://goreportcard.com/badge/github.com/echolabsinc/dynamixel)](https://goreportcard.com/report/github.com/echolabsinc/dynamixel)
+[![GoDoc](https://godoc.org/github.com/echolabsinc/dynamixel?status.svg)](https://godoc.org/github.com/echolabsinc/dynamixel)
 
 This packages provides a Go interface to Dynamixel servos.
 
@@ -118,7 +118,7 @@ The API is based on the Dynamixel [v1 protocol] [proto] docs.
 
 [ax]:       http://support.robotis.com/en/product/dynamixel/ax_series/dxl_ax_actuator.htm
 [xl]:       http://support.robotis.com/en/product/dynamixel/xl-series/xl-320.htm
-[docs]:     https://godoc.org/github.com/adammck/dynamixel
-[examples]: https://github.com/adammck/dynamixel/tree/master/examples
+[docs]:     https://godoc.org/github.com/echolabsinc/dynamixel
+[examples]: https://github.com/echolabsinc/dynamixel/tree/master/examples
 [proto]:    http://support.robotis.com/en/product/dynamixel/ax_series/dxl_ax_actuator.htm#Control_Table
-[license]:  https://github.com/adammck/dynamixel/blob/master/LICENSE
+[license]:  https://github.com/echolabsinc/dynamixel/blob/master/LICENSE
