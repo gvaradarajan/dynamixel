@@ -27,21 +27,25 @@ func New(servos []*servo.Servo) *Wx250s{
 			"Wrist_rot":   []*servo.Servo{servos[7]},
 			"Gripper":     []*servo.Servo{servos[8]},
 		},
-		LimbLengths
 	}
 }
 
 // Required methods for kinematics
 
-// GetAllAngles will return a list of the angles of each servo
-func (a *Wx250s) GetAllAngles() []int{
-	var angles []int
-	for i, s := range(a.GetAllServos()){
-		pos, err := s.PresentPosition()
-		if err != nil {
-			fmt.Println(err)
+// GetAllAngles will return a list of the angles of each joint, taking the int-casted average for angles with multiple
+func (a *Wx250s) GetAllAngles() map[string]int{
+	var angles make(map[string]int)
+	for jointName, servos := range(a.Joints){
+		angleSum := 0
+		for _, s := range(servos){
+			pos, err := s.PresentPosition()
+			if err != nil {
+				fmt.Println(err)
+			}
+			angleSum += s
 		}
-		angles = append(angles, pos)
+		angleSum = int(angleSum/len(servos))
+		angles[jointName] = angleSum
 	}
 	return angles
 }
