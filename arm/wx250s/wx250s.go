@@ -4,14 +4,18 @@ import (
 	"fmt"
 	"time"
 	"github.com/echolabsinc/dynamixel/servo"
+	"github.com/echolabsinc/kinematics/joint"
 )
 
 type Wx250s struct{
 	Joints map[string][]*servo.Servo
+	LimbLengths map[string]float64
 }
 
 
-// TODO: No need to duplicate the servos here, find a better way to apply things to all of them
+// TODO: Probably want to add/replace things with maybe Joint objects (doesn't yet exist)
+// TODO: Find a better way of representing things like sleep angles, home angles, and limb lengths
+// Currently the above is hacked together to make a proof of concept for fk/ik
 func New(servos []*servo.Servo) *Wx250s{
 	return &Wx250s{
 		Joints: map[string][]*servo.Servo{
@@ -23,7 +27,27 @@ func New(servos []*servo.Servo) *Wx250s{
 			"Wrist_rot":   []*servo.Servo{servos[7]},
 			"Gripper":     []*servo.Servo{servos[8]},
 		},
+		LimbLengths
 	}
+}
+
+// Required methods for kinematics
+
+// GetAllAngles will return a list of the angles of each servo
+func (a *Wx250s) GetAllAngles() []int{
+	var angles []int
+	for i, s := range(a.GetAllServos()){
+		pos, err := s.PresentPosition()
+		if err != nil {
+			fmt.Println(err)
+		}
+		angles = append(angles, pos)
+	}
+	return angles
+}
+
+func (a *Wx250s) LimbLengths() map[string]float64{
+	return a.LimbLengths
 }
 
 // Note: there are a million and a half different ways to move servos
@@ -172,12 +196,9 @@ func (a *Wx250s) SleepPosition() error{
 //Go to the home position
 func (a *Wx250s) HomePosition() error{
 	wait := false
-	a.JointTo("Waist", 2048, wait)
-	a.JointTo("Shoulder", 2048, wait)
-	a.JointTo("Wrist_rot", 2048, wait)
-	a.JointTo("Wrist", 2048, wait)
-	a.JointTo("Forearm_rot", 2048, wait)
-	a.JointTo("Elbow", 2048, wait)
+	for jointName, _ := range(a.Joints){
+		a.JointTo(jointName, 2048, wait)
+	}
 	a.WaitForMovement()
 	return nil
 }
