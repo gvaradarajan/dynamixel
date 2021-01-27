@@ -5,7 +5,7 @@ import (
 	"io"
 	"time"
 
-	"dynamixel/iface"
+	"github.com/echolabsinc/dynamixel/iface"
 )
 
 const (

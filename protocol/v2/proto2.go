@@ -6,7 +6,7 @@ import (
 	"io"
 	"time"
 
-	"dynamixel/network"
+	"github.com/echolabsinc/dynamixel/network"
 )
 
 const (

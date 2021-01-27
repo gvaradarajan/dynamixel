@@ -4,10 +4,10 @@ package s_model
 import (
 	"io"
 	"fmt"
-	"dynamixel/protocol/v2"
-	reg "dynamixel/registers"
-	"dynamixel/servo"
-	"dynamixel/utils"
+	"github.com/echolabsinc/dynamixel/protocol/v2"
+	reg "github.com/echolabsinc/dynamixel/registers"
+	"github.com/echolabsinc/dynamixel/servo"
+	"github.com/echolabsinc/dynamixel/utils"
 )
 
 var Registers reg.Map

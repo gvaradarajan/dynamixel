@@ -3,7 +3,7 @@ package wx250s
 import (
 	"fmt"
 	"time"
-	"dynamixel/servo"
+	"github.com/echolabsinc/dynamixel/servo"
 )
 
 type Wx250s struct{

@@ -1,8 +1,8 @@
 package servo
 
 import (
-	reg "dynamixel/registers"
-	"dynamixel/utils"
+	reg "github.com/echolabsinc/dynamixel/registers"
+	"github.com/echolabsinc/dynamixel/utils"
 )
 
 // These methods are getters for the various registers in the control table.
