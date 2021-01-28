@@ -34,7 +34,7 @@ func New(servos []*servo.Servo) *Wx250s{
 
 // GetAllAngles will return a list of the angles of each joint, taking the int-casted average for angles with multiple
 func (a *Wx250s) GetAllAngles() map[string]int{
-	var angles make(map[string]int)
+	angles := make(map[string]int)
 	for jointName, servos := range(a.Joints){
 		angleSum := 0
 		for _, s := range(servos){
