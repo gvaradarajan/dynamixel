@@ -50,8 +50,8 @@ func (a *Wx250s) GetAllAngles() map[string]int{
 	return angles
 }
 
-func (a *Wx250s) LimbLengths() map[string]float64{
-	return a.LimbLengths
+func (a *Wx250s) JointOrder() []string{
+	return []string{"Waist","Shoulder","Elbow","Forearm_rot","Wrist","Wrist_rot","Gripper"}
 }
 
 // Note: there are a million and a half different ways to move servos
