@@ -4,12 +4,11 @@ import (
 	"fmt"
 	"time"
 	"github.com/echolabsinc/dynamixel/servo"
-	"github.com/echolabsinc/kinematics/joint"
+	//~ "github.com/echolabsinc/kinematics/joint"
 )
 
 type Wx250s struct{
 	Joints map[string][]*servo.Servo
-	LimbLengths map[string]float64
 }
 
 
@@ -42,7 +41,7 @@ func (a *Wx250s) GetAllAngles() map[string]int{
 			if err != nil {
 				fmt.Println(err)
 			}
-			angleSum += s
+			angleSum += pos
 		}
 		angleSum = int(angleSum/len(servos))
 		angles[jointName] = angleSum
