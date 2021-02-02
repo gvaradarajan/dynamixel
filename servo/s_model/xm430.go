@@ -1,7 +1,7 @@
 package s_model
 
 import (
-	reg "github.com/echolabsinc/dynamixel/registers"
+	reg "github.com/viamrobotics/dynamixel/registers"
 )
 // New returns a new XM-430 registry
 // See: https://emanual.robotis.com/docs/en/dxl/x/xm430-w350/

@@ -4,9 +4,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/echolabsinc/dynamixel/iface"
-	reg "github.com/echolabsinc/dynamixel/registers"
-	"github.com/echolabsinc/dynamixel/utils"
+	"github.com/viamrobotics/dynamixel/iface"
+	reg "github.com/viamrobotics/dynamixel/registers"
+	"github.com/viamrobotics/dynamixel/utils"
 )
 
 const (

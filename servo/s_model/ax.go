@@ -1,7 +1,7 @@
 package s_model
 
 import (
-	reg "github.com/echolabsinc/dynamixel/registers"
+	reg "github.com/viamrobotics/dynamixel/registers"
 )
 
 // New returns a new AX-series register

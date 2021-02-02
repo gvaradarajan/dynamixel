@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/echolabsinc/dynamixel/utils"
+	"github.com/viamrobotics/dynamixel/utils"
 )
 
 const (
