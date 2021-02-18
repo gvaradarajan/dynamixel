@@ -12,8 +12,8 @@ import (
 const (
 
 	// Unit conversions
-	maxPos          uint16  = 1023
-	maxAngle        float64 = 300
+	maxPos          uint16  = 2048
+	maxAngle        float64 = 180
 	positionToAngle float64 = maxAngle / float64(maxPos) // 0.293255132
 	angleToPosition float64 = 1 / positionToAngle        // 3.41
 )

@@ -204,6 +204,30 @@ func (s *Servo) GoalPosition() (int, error) {
 	return s.getRegister(reg.GoalPosition)
 }
 
+func (s *Servo) PGain() (int, error) {
+	return s.getRegister(reg.PGain)
+}
+
+func (s *Servo) SetPGain(v int) (error) {
+	return s.setRegister(reg.PGain, v)
+}
+
+func (s *Servo) IGain() (int, error) {
+	return s.getRegister(reg.IGain)
+}
+
+func (s *Servo) SetIGain(v int) (error) {
+	return s.setRegister(reg.IGain, v)
+}
+
+func (s *Servo) DGain() (int, error) {
+	return s.getRegister(reg.DGain)
+}
+
+func (s *Servo) SetDGain(v int) (error) {
+	return s.setRegister(reg.DGain, v)
+}
+
 // SetGoalPosition sets the goal position.
 //
 // TODO: Reject if the servo is in wheel mode (where CW and CCW angle limit
@@ -271,6 +295,14 @@ func (s *Servo) RegisteredInstruction() (int, error) {
 
 func (s *Servo) Moving() (int, error) {
 	return s.getRegister(reg.Moving)
+}
+
+func (s *Servo) MovingThreshold() (int, error) {
+	return s.getRegister(reg.MovingThreshold)
+}
+
+func (s *Servo) SetMovingThreshold(v int) error {
+	return s.setRegister(reg.MovingThreshold, v)
 }
 
 // TODO: Rename this to avoid confusion?

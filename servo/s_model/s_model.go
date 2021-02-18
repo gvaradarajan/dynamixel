@@ -36,8 +36,9 @@ func New(network io.ReadWriter, ID int) (*servo.Servo, error) {
 	default:
 		return nil, fmt.Errorf("Servo id %d version not supported: %d", ID, v)
 	}
-
-	return servo.New(v2.New(network), Registers, ID), nil
+	s := servo.New(v2.New(network), Registers, ID)
+	//~ s.ID = s.ServoID
+	return s, nil
 }
 
 //~ func NewWithReturnLevel(network io.ReadWriter, ID int, returnLevel int) (*servo.Servo, error) {
