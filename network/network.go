@@ -5,7 +5,7 @@ import (
 	"io"
 	"time"
 
-	"github.com/viamrobotics/dynamixel/iface"
+	"go.viam.com/dynamixel/iface"
 )
 
 const (

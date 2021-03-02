@@ -4,10 +4,10 @@ package s_model
 import (
 	"io"
 	"fmt"
-	"github.com/viamrobotics/dynamixel/protocol/v2"
-	reg "github.com/viamrobotics/dynamixel/registers"
-	"github.com/viamrobotics/dynamixel/servo"
-	"github.com/viamrobotics/dynamixel/utils"
+	"go.viam.com/dynamixel/protocol/v2"
+	reg "go.viam.com/dynamixel/registers"
+	"go.viam.com/dynamixel/servo"
+	"go.viam.com/dynamixel/utils"
 )
 
 var Registers reg.Map

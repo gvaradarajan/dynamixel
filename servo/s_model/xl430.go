@@ -1,7 +1,7 @@
 package s_model
 
 import (
-	reg "github.com/viamrobotics/dynamixel/registers"
+	reg "go.viam.com/dynamixel/registers"
 )
 // New returns a new XL-430 registry
 // See: https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/

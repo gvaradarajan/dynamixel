@@ -4,9 +4,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/viamrobotics/dynamixel/iface"
-	reg "github.com/viamrobotics/dynamixel/registers"
-	"github.com/viamrobotics/dynamixel/utils"
+	"go.viam.com/dynamixel/iface"
+	reg "go.viam.com/dynamixel/registers"
+	"go.viam.com/dynamixel/utils"
 )
 
 const (

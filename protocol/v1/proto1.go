@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/viamrobotics/dynamixel/utils"
+	"go.viam.com/dynamixel/utils"
 )
 
 const (

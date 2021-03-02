@@ -6,7 +6,7 @@ import (
 	"io"
 	"time"
 
-	"github.com/viamrobotics/dynamixel/network"
+	"go.viam.com/dynamixel/network"
 )
 
 const (
