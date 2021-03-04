@@ -305,6 +305,22 @@ func (s *Servo) SetMovingThreshold(v int) error {
 	return s.setRegister(reg.MovingThreshold, v)
 }
 
+func (s *Servo) MinPositionLimit() (int, error) {
+	return s.getRegister(reg.MinPositionLimit)
+}
+
+func (s *Servo) SetMinPositionLimit(v int) error {
+	return s.setRegister(reg.MinPositionLimit, v)
+}
+
+func (s *Servo) MaxPositionLimit() (int, error) {
+	return s.getRegister(reg.MaxPositionLimit)
+}
+
+func (s *Servo) SetMaxPositionLimit(v int) error {
+	return s.setRegister(reg.MaxPositionLimit, v)
+}
+
 // TODO: Rename this to avoid confusion?
 func (s *Servo) Lock() (int, error) {
 	return s.getRegister(reg.Lock)
