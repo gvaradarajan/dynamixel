@@ -247,6 +247,11 @@ func (s *Servo) Ping() error {
 	return s.Protocol.Ping(s.ID)
 }
 
+// Reboots a servo, useful for if it overloads
+func (s *Servo) Reboot() error {
+	return s.Protocol.Reboot(s.ID)
+}
+
 // PrintRegisters prints out the contents of all registers
 func (s *Servo) PrintRegisters() {
 	for k, _ := range(s.registers){
