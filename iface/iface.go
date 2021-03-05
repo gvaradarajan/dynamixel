@@ -30,7 +30,7 @@ type Protocol interface {
 	Action() error
 
 	// FactoryReset() error
-	// Reboot() error
+	Reboot() error
 	// SyncRead() error
 	// SyncWrite() error
 	// BulkRead() error

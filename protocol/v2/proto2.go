@@ -195,6 +195,28 @@ func (p *Proto2) Ping(ident int) error {
 	return nil
 }
 
+// Reboot sends the REBOOT instruction
+func (p *Proto2) Reboot(ident int) error {
+
+	// HACK: responses can take forever on XL-320s, but we don't want to
+	//       raise the timeout for everything.
+	nw, ok := p.Network.(*network.Network)
+	if ok {
+		ot := nw.Timeout
+		nw.Timeout = 2 * time.Second
+		defer func() {
+			nw.Timeout = ot
+		}()
+	}
+
+	err := p.writeInstruction(ident, Reboot, nil)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 // ReadData reads a slice of n bytes from the control table of the given servo
 // ID. Use the bytesToInt function to convert the output to something more
 // useful.

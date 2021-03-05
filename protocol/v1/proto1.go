@@ -16,7 +16,7 @@ const (
 	WriteData byte = 0x03
 	RegWrite  byte = 0x04
 	Action    byte = 0x05
-	Reset     byte = 0x06
+	Reboot    byte = 0x06
 	SyncWrite byte = 0x83
 
 	// Send an instruction to all servos
@@ -183,6 +183,17 @@ func (p *Proto1) Ping(ident int) error {
 	// There's no way to disable the status packet for PING commands, so always
 	// wait for it. That's how we know that the servo is responding.
 	_, err = p.readStatusPacket(ident)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// Reboot sends the REBOOT instruction
+func (p *Proto1) Reboot(ident int) error {
+
+	err := p.writeInstruction(ident, Reboot, nil)
 	if err != nil {
 		return err
 	}
