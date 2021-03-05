@@ -74,6 +74,10 @@ func (s *Servo) SetBaudRate(v int) error {
 	return s.setRegister(reg.BaudRate, v)
 }
 
+func (s *Servo) SetOperatingMode(v int) error {
+	return s.setRegister(reg.OperatingMode, v)
+}
+
 func (s *Servo) ReturnDelayTime() (int, error) {
 	return s.getRegister(reg.ReturnDelayTime)
 }
