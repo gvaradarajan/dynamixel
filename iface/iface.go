@@ -13,6 +13,7 @@ type Logger interface {
 // all have roughly the same instructions, so this isn't a big deal.
 type Protocol interface {
 	Ping(ident int) error
+	Reboot(ident int) error
 
 	ReadData(ident int, address int, length int) ([]byte, error)
 
@@ -30,7 +31,6 @@ type Protocol interface {
 	Action() error
 
 	// FactoryReset() error
-	Reboot() error
 	// SyncRead() error
 	// SyncWrite() error
 	// BulkRead() error
