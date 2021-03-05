@@ -2,6 +2,7 @@ package s_model
 
 
 import (
+	"errors"
 	"io"
 	"fmt"
 	"go.viam.com/dynamixel/protocol/v2"
@@ -15,13 +16,23 @@ var Registers reg.Map
 // Determines the model of a servo, and configures it with the proper registry
 func New(network io.ReadWriter, ID int) (*servo.Servo, error) {
 	proto := v2.New(network)
-	proto.Reboot(ID)
-	proto.Ping(ID)
 	
 	//So far, all servos I know of have their version number in the two bytes at 0x00
 	b, err := proto.ReadData(ID, 0, 2)
 	if err != nil {
-		return nil, fmt.Errorf("error getting version for servo %d: %v\n", ID, err)
+		if err == errors.New("unknown error: 0x80"){
+			// Servo needs rebooting
+			err = proto.Reboot(ID)
+			if err != nil {
+				return nil, fmt.Errorf("error rebooting servo %d: %v\n", ID, err)
+			}
+			err = proto.Ping(ID)
+			if err != nil {
+				return nil, fmt.Errorf("error pinging servo %d: %v\n", ID, err)
+			}
+		}else{
+			return nil, fmt.Errorf("error getting version for servo %d: %v\n", ID, err)
+		}
 	}
 	v, err2 := utils.BytesToInt(b)
 	if err2 != nil {
