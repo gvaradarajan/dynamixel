@@ -14,8 +14,12 @@ var Registers reg.Map
 
 // Determines the model of a servo, and configures it with the proper registry
 func New(network io.ReadWriter, ID int) (*servo.Servo, error) {
+	proto := v2.New(network)
+	proto.Reboot(ID)
+	proto.Ping(ID)
+	
 	//So far, all servos I know of have their version number in the two bytes at 0x00
-	b, err := v2.New(network).ReadData(ID, 0, 2)
+	b, err := proto.ReadData(ID, 0, 2)
 	if err != nil {
 		return nil, fmt.Errorf("error getting version for servo %d: %v\n", ID, err)
 	}
@@ -36,7 +40,7 @@ func New(network io.ReadWriter, ID int) (*servo.Servo, error) {
 	default:
 		return nil, fmt.Errorf("Servo id %d version not supported: %d", ID, v)
 	}
-	s := servo.New(v2.New(network), Registers, ID)
+	s := servo.New(proto, Registers, ID)
 	//~ s.ID = s.ServoID
 	return s, nil
 }
