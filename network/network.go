@@ -28,7 +28,7 @@ type Network struct {
 func New(serial io.ReadWriteCloser) *Network {
 	return &Network{
 		Serial:  serial,
-		Timeout: 10 * time.Millisecond,
+		Timeout: 50 * time.Millisecond,
 		Logger:  nil,
 	}
 }
