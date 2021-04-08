@@ -66,6 +66,14 @@ func (s *Servo) SetServoID(ident int) error {
 	return s.setRegister(reg.ServoID, ident)
 }
 
+func (s *Servo) DriveMode() (int, error) {
+	return s.getRegister(reg.DriveMode)
+}
+
+func (s *Servo) SetDriveMode(v int) error {
+	return s.setRegister(reg.DriveMode, v)
+}
+
 func (s *Servo) BaudRate() (int, error) {
 	return s.getRegister(reg.BaudRate)
 }
