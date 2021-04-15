@@ -49,6 +49,8 @@ func New(network io.ReadWriter, ID int) (*servo.Servo, error) {
 		Registers = init_xm430()
 	case 1060:
 		Registers = init_xl430()
+	case 1120:
+		Registers = init_xm540()
 
 	default:
 		return nil, fmt.Errorf("Servo id %d version not supported: %d", ID, v)
