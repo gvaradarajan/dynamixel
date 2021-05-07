@@ -1,8 +1,8 @@
 # Dynamixel
 
-[![Build Status](https://travis-ci.org/echolabsinc/dynamixel.svg?branch=master)](https://travis-ci.org/echolabsinc/dynamixel)
-[![Go Report Card](https://goreportcard.com/badge/github.com/echolabsinc/dynamixel)](https://goreportcard.com/report/github.com/echolabsinc/dynamixel)
-[![GoDoc](https://godoc.org/github.com/echolabsinc/dynamixel?status.svg)](https://godoc.org/github.com/echolabsinc/dynamixel)
+<p align="center">
+  <a href="https://go.viam.com/pkg/go.viam.com/dynamixel/"><img src="https://pkg.go.dev/badge/go.viam.com/dynamixel" alt="PkgGoDev"></a>
+</p>
 
 This packages provides a Go interface to Dynamixel servos.
 
