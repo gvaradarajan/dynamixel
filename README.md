@@ -1,7 +1,7 @@
 # Dynamixel
 
 <p align="center">
-  <a href="https://go.viam.com/pkg/go.viam.com/dynamixel/"><img src="https://pkg.go.dev/badge/go.viam.com/dynamixel" alt="PkgGoDev"></a>
+  <a href="https://pkg.go.dev/go.viam.com/dynamixel/"><img src="https://pkg.go.dev/badge/go.viam.com/dynamixel" alt="PkgGoDev"></a>
 </p>
 
 This packages provides a Go interface to Dynamixel servos.
