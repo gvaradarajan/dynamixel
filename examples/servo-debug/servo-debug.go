@@ -57,47 +57,47 @@ func main() {
 
 	err = _servo.SetTorqueEnable(false)
 	if err != nil {
-		return err
+		fmt.Println(err)
 	}
 	err = _servo.SetMovingThreshold(0)
 	if err != nil {
-		return fmt.Printf("error SetMovingThreshold servo %d", _servo.ID)
+		fmt.Printf("error SetMovingThreshold servo %d", _servo.ID)
 	}
 	dm, err := _servo.DriveMode()
 	if err != nil {
-		return fmt.Printf("error DriveMode servo %d", _servo.ID)
+		fmt.Printf("error DriveMode servo %d", _servo.ID)
 	}
 	if dm == 4 {
 		err = _servo.SetDriveMode(0)
 		if err != nil {
-			return fmt.Printf("error SetDriveMode0 servo %d", _servo.ID)
+			fmt.Printf("error SetDriveMode0 servo %d", _servo.ID)
 		}
 	}
 	if dm == 5 {
 		err = _servo.SetDriveMode(1)
 		if err != nil {
-			return fmt.Printf("error DriveMode1 servo %d", _servo.ID)
+			fmt.Printf("error DriveMode1 servo %d", _servo.ID)
 		}
 	}
 	err = _servo.SetPGain(2800)
 	if err != nil {
-		return fmt.Printf("error SetPGain servo %d", _servo.ID)
+		fmt.Printf("error SetPGain servo %d", _servo.ID)
 	}
 	err = _servo.SetIGain(50)
 	if err != nil {
-		return fmt.Printf("error SetIGain servo %d", _servo.ID)
+		fmt.Printf("error SetIGain servo %d", _servo.ID)
 	}
 	err = _servo.SetTorqueEnable(true)
 	if err != nil {
-		return fmt.Printf("error SetTorqueEnable servo %d", _servo.ID)
+		fmt.Printf("error SetTorqueEnable servo %d", _servo.ID)
 	}
 	err = _servo.SetProfileVelocity(50)
 	if err != nil {
-		return fmt.Printf("error SetProfileVelocity servo %d", _servo.ID)
+		fmt.Printf("error SetProfileVelocity servo %d", _servo.ID)
 	}
 	err = _servo.SetProfileAcceleration(10)
 	if err != nil {
-		return fmt.Printf("error SetProfileAcceleration servo %d", _servo.ID)
+		fmt.Printf("error SetProfileAcceleration servo %d", _servo.ID)
 	}
 
 	pos, err := _servo.PresentPosition()
