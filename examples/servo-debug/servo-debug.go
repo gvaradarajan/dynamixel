@@ -1,9 +1,10 @@
 package main
 
 import (
-	"errors"
 	"flag"
 	"fmt"
+	"os"
+
 	"github.com/jacobsa/go-serial/serial"
 	"go.viam.com/dynamixel/network"
 	"go.viam.com/dynamixel/servo/s_model"
@@ -40,7 +41,7 @@ func main() {
 
 	if err != nil {
 		fmt.Printf("error initializing servo %d: %s", *servoID, err.Error())
-		return
+		os.Exit(1)
 	}
 
 	err = _servo.Ping()
