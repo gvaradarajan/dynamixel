@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/jacobsa/go-serial/serial"
@@ -36,6 +37,9 @@ func main() {
 	}
 
 	n := network.New(s)
+	if *debug {
+		network.Logger = log.New(os.Stderr, "", log.LstdFlags)
+	}
 
 	_servo, err := s_model.New(n, *servoID)
 
