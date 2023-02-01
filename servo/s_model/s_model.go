@@ -1,14 +1,13 @@
 package s_model
 
-
 import (
-	"io"
 	"fmt"
-	"time"
 	"go.viam.com/dynamixel/protocol/v2"
 	reg "go.viam.com/dynamixel/registers"
 	"go.viam.com/dynamixel/servo"
 	"go.viam.com/dynamixel/utils"
+	"io"
+	"time"
 )
 
 var Registers reg.Map
@@ -16,11 +15,11 @@ var Registers reg.Map
 // Determines the model of a servo, and configures it with the proper registry
 func New(network io.ReadWriter, ID int) (*servo.Servo, error) {
 	proto := v2.New(network)
-	
+
 	//So far, all servos I know of have their version number in the two bytes at 0x00
 	b, err := proto.ReadData(ID, 0, 2)
 	if err != nil {
-		if err.Error() == "unknown error: 0x80"{
+		if err.Error() == "unknown error: 0x80" {
 			// Servo needs rebooting
 			err = proto.Reboot(ID)
 			if err != nil {
@@ -32,11 +31,12 @@ func New(network io.ReadWriter, ID int) (*servo.Servo, error) {
 			if err != nil {
 				return nil, fmt.Errorf("error pinging servo %d: %v\n", ID, err)
 			}
-		}else{
+		} else {
 			return nil, fmt.Errorf("!!!error getting version for servo %d: %v\n", ID, err)
 		}
 	}
 	v, err2 := utils.BytesToInt(b)
+	fmt.Println(v)
 	if err2 != nil {
 		return nil, fmt.Errorf("error converting version bytes for servo %d: %v\n", ID, err2)
 	}
@@ -61,6 +61,6 @@ func New(network io.ReadWriter, ID int) (*servo.Servo, error) {
 }
 
 //~ func NewWithReturnLevel(network io.ReadWriter, ID int, returnLevel int) (*servo.Servo, error) {
-	//~ s :=  servo.New(v2.New(network), Registers, ID), nil
-	//~ return s, nil
+//~ s :=  servo.New(v2.New(network), Registers, ID), nil
+//~ return s, nil
 //~ }
