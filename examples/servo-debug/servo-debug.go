@@ -53,4 +53,22 @@ func main() {
 		fmt.Printf("ping error: %s\n", err)
 		os.Exit(1)
 	}
+
+	pos, err = _servo.PresentPosition()
+	if err != nil {
+		fmt.Printf("pos error: %s\n", err)
+		os.Exit(1)
+	}
+
+	if pos == 0 {
+		newPos = pos + 100
+	} else {
+		newPos = pos - 200
+	}
+
+	err = _servo.SetGoalPosition(newPos)
+	if err != nil {
+		fmt.Printf("move error: %s\n", err)
+		os.Exit(1)
+	}
 }
