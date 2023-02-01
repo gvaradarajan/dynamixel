@@ -54,7 +54,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	pos, err = _servo.PresentPosition()
+	pos, err := _servo.PresentPosition()
 	if err != nil {
 		fmt.Printf("pos error: %s\n", err)
 		os.Exit(1)
