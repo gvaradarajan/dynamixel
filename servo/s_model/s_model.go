@@ -38,10 +38,11 @@ func New(network io.ReadWriter, ID int) (*servo.Servo, error) {
 		}
 	}
 	if v == 0 {
-		v, err2 := utils.BytesToInt(b)
+		vers, err2 := utils.BytesToInt(b)
 		if err2 != nil {
 			return nil, fmt.Errorf("error converting version bytes for servo %d: %v\n", ID, err2)
 		}
+		v = vers
 	}
 	fmt.Println(v)
 	// Set Registry based on model
