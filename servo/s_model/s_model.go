@@ -36,7 +36,8 @@ func New(network io.ReadWriter, ID int) (*servo.Servo, error) {
 			v = 1060
 			// return nil, fmt.Errorf("!!!error getting version for servo %d: %v\n", ID, err)
 		}
-	} else {
+	}
+	if v == 0 {
 		v, err2 := utils.BytesToInt(b)
 		if err2 != nil {
 			return nil, fmt.Errorf("error converting version bytes for servo %d: %v\n", ID, err2)
