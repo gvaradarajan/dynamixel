@@ -60,6 +60,7 @@ func main() {
 		os.Exit(1)
 	}
 
+	var newPos int
 	if pos == 0 {
 		newPos = pos + 100
 	} else {
