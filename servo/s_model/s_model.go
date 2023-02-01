@@ -18,6 +18,7 @@ func New(network io.ReadWriter, ID int) (*servo.Servo, error) {
 
 	//So far, all servos I know of have their version number in the two bytes at 0x00
 	b, err := proto.ReadData(ID, 0, 2)
+	var v int
 	if err != nil {
 		if err.Error() == "unknown error: 0x80" {
 			// Servo needs rebooting
@@ -32,7 +33,7 @@ func New(network io.ReadWriter, ID int) (*servo.Servo, error) {
 				return nil, fmt.Errorf("error pinging servo %d: %v\n", ID, err)
 			}
 		} else {
-			v := 1060
+			v = 1060
 			// return nil, fmt.Errorf("!!!error getting version for servo %d: %v\n", ID, err)
 		}
 	} else {
