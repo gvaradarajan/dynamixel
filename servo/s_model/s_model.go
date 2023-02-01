@@ -32,14 +32,16 @@ func New(network io.ReadWriter, ID int) (*servo.Servo, error) {
 				return nil, fmt.Errorf("error pinging servo %d: %v\n", ID, err)
 			}
 		} else {
-			return nil, fmt.Errorf("!!!error getting version for servo %d: %v\n", ID, err)
+			v := 1060
+			// return nil, fmt.Errorf("!!!error getting version for servo %d: %v\n", ID, err)
+		}
+	} else {
+		v, err2 := utils.BytesToInt(b)
+		if err2 != nil {
+			return nil, fmt.Errorf("error converting version bytes for servo %d: %v\n", ID, err2)
 		}
 	}
-	v, err2 := utils.BytesToInt(b)
 	fmt.Println(v)
-	if err2 != nil {
-		return nil, fmt.Errorf("error converting version bytes for servo %d: %v\n", ID, err2)
-	}
 	// Set Registry based on model
 	//Note that the AX model uses protocol V1, currently not supported
 	switch v {
