@@ -33,8 +33,8 @@ func New(network io.ReadWriter, ID int) (*servo.Servo, error) {
 				return nil, fmt.Errorf("error pinging servo %d: %v\n", ID, err)
 			}
 		} else {
-			v = 1060
-			// return nil, fmt.Errorf("!!!error getting version for servo %d: %v\n", ID, err)
+			// v = 1060
+			return nil, fmt.Errorf("!!!error getting version for servo %d: %v\n", ID, err)
 		}
 	}
 	if v == 0 {
