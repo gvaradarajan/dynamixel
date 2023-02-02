@@ -8,13 +8,13 @@ import (
 
 	"github.com/jacobsa/go-serial/serial"
 	"go.viam.com/dynamixel/network"
-	"go.viam.com/dynamixel/servo"
+	// "go.viam.com/dynamixel/servo"
 	"go.viam.com/dynamixel/servo/s_model"
 )
 
 var (
 	portName = flag.String("port", "/dev/serial/by-id/usb-FTDI_USB__-__Serial_Converter_FT4TFT52-if00-port0", "the serial port path")
-	servoID  = flag.Int("id", 8, "the ID of the servo to move")
+	servoID  = flag.Int("id", 9, "the ID of the servo to move")
 	debug    = flag.Bool("debug", false, "show serial traffic")
 )
 
